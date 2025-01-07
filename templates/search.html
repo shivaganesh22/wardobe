@@ -1,0 +1,204 @@
+{%extends 'header.html'%}
+{{% block main%}
+
+<form class="w-3/4 mx-auto">
+    <div class="flex">
+        <form action="" method="post">
+            <!-- Category Filter -->
+            <label for="category-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Category</label>
+            <button id="category-dropdown-button" data-dropdown-toggle="category"
+                class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                type="button">
+                <span id="selected-category">All Categories</span>
+                <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m1 1 4 4 4-4" />
+                </svg>
+            </button>
+            <input type="hidden" id="category-input" name="category" value="">
+            <div id="category"
+                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="category-dropdown-button">
+                    <li>
+                        <button type="button"
+                            class="category-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                            All Categories
+                        </button>
+                    </li>
+                    {% for i in category %}
+                    <li>
+                        <button type="button"
+                            class="category-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                            {{ i.name }}
+                        </button>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Gender Filter -->
+            <label for="gender-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Gender</label>
+            <button id="gender-dropdown-button" data-dropdown-toggle="gender"
+                class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300  hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                type="button">
+                <span id="selected-gender">All Genders</span>
+                <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m1 1 4 4 4-4" />
+                </svg>
+            </button>
+            <input type="hidden" id="gender-input" name="gender" value="">
+            <div id="gender"
+                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="gender-dropdown-button">
+                    <li>
+                        <button type="button"
+                            class="gender-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                            All Genders
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button"
+                            class="gender-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                            Men
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button"
+                            class="gender-item inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                            Women
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Other Filters -->
+            <input type="search" id="search-dropdown"
+                class="block p-2.5 w-40 z-20 text-sm text-gray-900 bg-gray-50 border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                placeholder="Enter price range" name="price" value="{{price}}" />
+            <input type="search" id="location-input"
+                class="block p-2.5 w-40 z-20 text-sm text-gray-900 bg-gray-50 border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                placeholder="Enter nearest city" name="location" value="{{location}}" />
+            <div class="relative w-full">
+                <input type="search" id="search-dropdown"
+                    class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                    placeholder="Search any product" name="query" value="{{query}}" />
+                <button type="submit"
+                    class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                    <span class="sr-only">Search</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</form>
+
+<script>
+    // Get user's location and populate the input field
+    window.addEventListener('load', function() {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                // Use reverse geocoding to get city name
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                
+                fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const city = data.address.city || data.address.town || data.address.village || '';
+                        if (city && !document.getElementById('location-input').value) {
+                            document.getElementById('location-input').value = city;
+                        }
+                    })
+                    .catch(error => console.error('Error getting location:', error));
+            });
+        }
+    });
+
+    // Rest of your existing JavaScript code
+    // Handle category selection
+    const categoryInput = document.getElementById('category-input');
+    const selectedCategory = document.getElementById('selected-category');
+    const categoryItems = document.querySelectorAll('.category-item');
+    
+    var category = '{{ selected_category|default:"All Categories"|safe }}';
+    if (category && category !== "All Categories") {
+        selectedCategory.textContent = category;
+        categoryInput.value = category;
+    } else {
+        selectedCategory.textContent = "All Categories";
+        categoryInput.value = "";
+    }
+
+    categoryItems.forEach(item => {
+        item.addEventListener('click', function () {
+            const categoryName = this.textContent.trim();
+            selectedCategory.textContent = categoryName;
+            categoryInput.value = categoryName;
+            document.getElementById('category').classList.add('hidden');
+        });
+    });
+
+    // Handle gender selection
+    const genderInput = document.getElementById('gender-input');
+    const selectedGender = document.getElementById('selected-gender');
+    const genderItems = document.querySelectorAll('.gender-item');
+    
+    var gender = '{{ selected_gender|default:"All Genders"|safe }}';
+    if (gender && gender !== "All Genders") {
+        selectedGender.textContent = gender;
+        genderInput.value = gender;
+    } else {
+        selectedGender.textContent = "All Genders";
+        genderInput.value = "";
+    }
+
+    genderItems.forEach(item => {
+        item.addEventListener('click', function () {
+            const genderName = this.textContent.trim();
+            selectedGender.textContent = genderName;
+            genderInput.value = genderName;
+            document.getElementById('gender').classList.add('hidden');
+        });
+    });
+</script>
+
+{% if data %}
+<!-- Product Listing -->
+<section class="bg-white dark:bg-gray-900 py-12">
+    <div class="container px-4 mx-auto">
+        <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
+            {% for item in data %}
+            <div class="overflow-hidden bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 transition-transform duration-300 hover:scale-105">
+                <a href="/post/view/{{ item.id }}">
+                    <img class="rounded-t-lg h-48 w-full object-cover" src="{{ item.image.url }}" alt="img">
+                    <div class="p-5">
+                        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white line-clamp-2">{{ item.title }}</h5>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 line-clamp-3">{{ item.description }}</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-bold text-gray-900 dark:text-white">₹ {{ item.price }}</span>
+                            <a href="/order/{{ item.id }}/1"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Rent Now</a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% else %}
+<center>
+    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">
+        No Products Found
+    </h1>
+</center>
+{% endif %}
+{%endblock%}
