@@ -1,5 +1,5 @@
 django
 django-allauth
-jwt
+PyJWT
 razorpay
 qrcode

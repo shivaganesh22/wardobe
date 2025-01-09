@@ -202,8 +202,8 @@ def makeorder(r,id,q):
             if form.errors:
                 return render(r, 'makeorder.html', {"form": form})
             amount=round((product.price//int(product.rent_method))*(end-start).days)
-            payment=client.order.create({"amount":float(amount*q*100+5000),'currency':'INR','payment_capture':1})
             shipping=50 if form.cleaned_data['delivery_type']=="Courier" else 0
+            payment=client.order.create({"amount":float(amount*q*100+shipping*100),'currency':'INR','payment_capture':1})
             ecom=uuid.uuid4()
             new_order=Order (
                 ecommerce_id=ecom,
