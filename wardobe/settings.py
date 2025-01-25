@@ -57,6 +57,7 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'app.middleware.ProfileMiddleware',
+    'app.middleware.AdminAccessMiddleware'
     
 ]
 

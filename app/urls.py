@@ -49,4 +49,5 @@ urlpatterns = [
     #orders
     path('admin/orders/',admin_views.orders),
     path('admin/order/update/<int:id>/',admin_views.updateorder),
+    path('not-authorized/', not_authorized, name='not_authorized'),
 ]

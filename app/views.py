@@ -543,3 +543,5 @@ def user_orders_update(r,id):
             update_order(order.ecommerce_id,order.payment_id,order.payment_status)
             return redirect(f'/post/orders')
     return render(r,"user_orders_update.html",{"form":form})
+def not_authorized(request):
+    return render(request, 'not_authorized.html', status=403)

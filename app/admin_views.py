@@ -4,7 +4,7 @@ from django.contrib import messages
 from .views import update_order
 from .models import *
 from .forms import *
-@user_passes_test(lambda u:u.is_superuser)
+@user_passes_test(lambda u:u.is_superuser,login_url='/not-authorized/')
 def dashboard(r):
     return render(r,'admin/home.html')
 #category
