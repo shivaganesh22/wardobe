@@ -1,0 +1,63 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block main %}
+
+<section class="bg-white dark:bg-gray-900 py-8">
+    <div class="container px-4 mx-auto">
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Your Posts</h1>
+
+        {% if data %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {% for item in data %}
+            <div
+                class="overflow-hidden bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 transition-transform duration-300 hover:scale-105">
+                <a href="/post/view/{{ item.id }}">
+                    <img class="rounded-t-lg h-48 w-full object-cover" src="{{ item.image.url }}" alt="img">
+                    <div class="p-5">
+                        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white line-clamp-2">
+                            {{ item.title }}
+                        </h5>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 line-clamp-3">
+                            {{ item.description }}</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-bold text-gray-900 dark:text-white">₹ {{ item.price }}</span>
+                            <div class="flex items-center space-x-2">
+                                <a href="/post/edit/{{ item.id }}"
+                                    class="inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z">
+                                        </path>
+                                        <path fill-rule="evenodd"
+                                            d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </a>
+                                <a href="/post/delete/{{ item.id }}"
+                                    class="inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-900">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center">
+            <h1 class="text-xl font-bold text-gray-900 md:text-2xl dark:text-white">
+                No Posts Found
+            </h1>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

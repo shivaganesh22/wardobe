@@ -1,0 +1,43 @@
+{% extends 'header.html' %}
+{% block main %}
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border dark:border-gray-700">
+        <div class="p-6 sm:p-8">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-white text-center mb-6">
+                Rent Details
+            </h1>
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="grid grid-cols-2 gap-6">
+                    {% for field in form %}
+                    <div class="mb-4">
+                        <label for="{{ field.id_for_label }}"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            {{ field.label }}
+                        </label>
+                        {{ field }}
+                        {% if field.help_text %}
+                        <small class="block mt-1 text-xs text-gray-500 dark:text-gray-400">{{ field.help_text }}</small>
+                        {% endif %}
+                        {% for error in field.errors %}
+                        <div class="text-red-500 text-sm mt-1">
+                            {{ error }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="mt-6">
+                    <button type="submit"
+                        class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

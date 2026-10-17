@@ -1,0 +1,7 @@
+django
+django-allauth
+PyJWT
+razorpay
+qrcode
+cryptography
+pillow
